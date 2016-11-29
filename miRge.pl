@@ -52,7 +52,7 @@ my $phred64 = '';
 my $isomirDiff = '';
 my $versionAsk = '';
 
-GetOptions($settings,('help' => \$help,'version' => \$versionAsk,'adapter=s','species=s','CPU=s','SampleFiles=s','isomirCutoff=s', 'bowtie=s', 'phred64' => \$phred64, 'diff-isomirs' => \$isomirDiff));
+GetOptions($settings,('help' => \$help,'version' => \$versionAsk,'adapter=s','species=s','CPU=s','SampleFiles=s','isomirCutoff=s', 'bowtie=s', 'output=s', 'phred64' => \$phred64, 'diff-isomirs' => \$isomirDiff));
 
 @sampleFiles = split(',', $$settings{'SampleFiles'});
 for (my $i=0; $i<(@sampleFiles); $i++) {
@@ -90,7 +90,7 @@ my $readLengthHash = {}; # key is length
 my $logHash = {}; # two primary keys annot and quant
 my $graphHash = {};
 my $tStamp = int(time);
-my $outputPath = 'miRge.'.$tStamp;
+my $outputPath = $$settings{output} || 'miRge.'.$tStamp;
 system('mkdir '.$outputPath);
 system('mkdir '.$outputPath.'/graphs');
 
